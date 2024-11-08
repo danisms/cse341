@@ -1,0 +1,16 @@
+//LOCALHOST
+# Get All Contacts
+GET http://localhost:3000/contacts
+
+# Get Contact By Id
+GET http://localhost:3000/contacts/672e731e07174c7c1f8e53ef
+
+
+
+// PRODUCTION
+# Get All Contacts
+GET https://cse341-87qw.onrender.com/contacts
+
+# Get Contact By Id
+GET https://cse341-87qw.onrender.com/contacts/672e731e07174c7c1f8e53ef
+
