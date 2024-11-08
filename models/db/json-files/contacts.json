@@ -1,0 +1,37 @@
+[
+    {
+        "firstName": "Daniel",
+        "lastName": "Opute",
+        "email": "danielcopute@gmail.com",
+        "favoriteColor": "cyan",
+        "birthday": "22-12-2000"
+    },
+    {
+        "firstName": "Victor",
+        "lastName": "Opute",
+        "email": "victoropute@gmail.com",
+        "favoriteColor": "black",
+        "birthday": "23-09-2004"
+    },
+    {
+        "firstName": "Ruth",
+        "lastName": "Opute",
+        "email": "ruthopute@gmail.com",
+        "favoriteColor": "red",
+        "birthday": "05-05-1995"
+    },
+    {
+        "firstName": "Gabriel",
+        "lastName": "Opute",
+        "email": "gabrielopute@gmail.com",
+        "favoriteColor": "gold",
+        "birthday": "23-07-1991"
+    },
+    {
+        "firstName": "Sunday",
+        "lastName": "Opute",
+        "email": "sundayifakachukwucopute@gmail.com",
+        "favoriteColor": "red",
+        "birthday": "29-10-1989"
+    }
+]
