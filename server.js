@@ -6,6 +6,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const cors = require('cors');
+// const swaggerAutogen = require('swagger-autogen')();
 // const MongoClient = require('mongodb').MongoClient
 
 // Modules

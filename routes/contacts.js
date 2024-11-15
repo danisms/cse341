@@ -14,6 +14,15 @@ router.get('/', contactController.getAllContacts);
 // Route to get contact by id
 router.get('/:id', contactController.getAContact)
 
-// EXPORT
+// Route to create a contact
+router.post('/', contactController.createNewContact);
 
+// Route to update a contact
+router.put('/:id', contactController.updateAContact);
+
+// Route to delete a contact
+router.delete('/:id', contactController.deleteAContact);
+
+
+// EXPORT
 module.exports = router;

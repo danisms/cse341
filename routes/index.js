@@ -1,6 +1,7 @@
 // IMPORT REQUIRED MODULES
 const express = require('express');
 const contactRoute = require('./contacts');
+const swaggerRoute = require('./swagger');
 
 // IMPORT CONTROLLER
 const baseController = require('../controllers')
@@ -10,8 +11,9 @@ const baseController = require('../controllers')
 const router = express.Router();
 
 router.get('/', baseController.displayHome);
-
+router.use('/', swaggerRoute);
 router.use('/contacts', contactRoute);
+// router.use('/', baseController.displayHome);
 
 
 // EXPORT
