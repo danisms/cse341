@@ -6,12 +6,18 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const cors = require('cors');
+// const { logError, returnError, isOperationalError } = require('./errorHandler');
+
+// const graphqlHTTP = require('express-graphql');
+// const schema = require('./schema/schema');
+
 // const swaggerAutogen = require('swagger-autogen')();
 // const MongoClient = require('mongodb').MongoClient
 
 // Modules
 const mongodb = require('./models/db/connect-db');
 const routes = require('./routes');
+// const { graphql } = require('graphql');
 
 
 /**************************************
@@ -34,9 +40,34 @@ app.use(cors());
 /*************************************
 *********** ROUTES SETUPS ************
 *************************************/
+// This route is used as an endpoint to interact with Graphql,
+// All queries go through this route.
+// app.use('/graphql', graphqlHTTP({
+//     // directing express-graphql to use this schema to map out the graph
+//     schema,
+//     // directing express-graph to use graphiql when goto '/graphql' address in the browser
+//     // which provides an interface to make GraphQl queries
+//     graphql:true
+// }))
+
 // Get Routes
 app.use('/', routes)
 
+
+/*************************************
+*********** HANDLE ERROR *************
+*************************************/
+// handle operational errors
+// app.use(logError)
+// app.use(returnError)
+// // handle other errors (programmer error)
+// process.on('uncaughtException', error => {
+//     logError(error)
+//     // restart process/program if error is not opeartional error
+//     if (!isOperationalError(error)) {
+//         process.exit(1);
+//     }
+// })
 
 /*************************************
 ****** LOCAL SERVER INFORMATION ******

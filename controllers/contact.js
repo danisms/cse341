@@ -1,6 +1,7 @@
 // IMPORT REQUIRED MODULES
 const mongodb = require('../models/db/connect-db');
 const ObjectId = require('mongodb').ObjectId
+const { logError } = require('../errorHandler');
 
 
 // CREATE CONTACT CONTROLLER OBJECT HOLDER
@@ -11,9 +12,13 @@ contactController.getAllContacts = async function(req, res) {
     //#swagger.tags=['contact']
     try {
         const dataResult = await mongodb.getDb().db('project01').collection('contacts').find();
-        dataResult.toArray().then((contacts) => {
+        dataResult.toArray((err, lists)=> {
+            if (err) {
+                logError(err);
+                res.status(400).json({message: err});
+            }
             res.setHeader('Content-Type', 'application/json');
-            res.status(200).json(contacts);
+            res.status(200).json(lists);
         })
     } catch (err) {
         console.error(err);
@@ -23,12 +28,21 @@ contactController.getAllContacts = async function(req, res) {
 // Get a contact by the contact id
 contactController.getAContact = async function(req, res) {
     //#swagger.tags=['contact']
+    // check if id is valid
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(400).json({message: "invalid id. Contact id must be valid to get contact"});
+    }
+
     const contactId = new ObjectId(req.params.id);
     try {
         const dataResult = await mongodb.getDb().db('project01').collection('contacts').find({ _id: contactId });
-        dataResult.toArray().then((contacts) => {
+        dataResult.toArray((err, lists)=> {
+            if (err) {
+                logError(err);
+                res.status(400).json({message: err});
+            }
             res.setHeader('Content-Type', 'application/json');
-            res.status(200).json(contacts);
+            res.status(200).json(lists);
         })
     } catch (err) {
         console.error(err);
@@ -75,6 +89,11 @@ contactController.createNewContact = async function(req, res) {
 // Update a contact
 contactController.updateAContact = async function(req, res) {
     //#swagger.tags=['contact']
+    // check if id is valid
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(400).json({message: "invalid id. Contact id must be valid to update contact"});
+    }
+
     // check if req.body object is present
     if (!req.body) {
         return res.status(400).send({
@@ -113,6 +132,12 @@ contactController.updateAContact = async function(req, res) {
 // Delete a contact
 contactController.deleteAContact = async function(req, res) {
     //#swagger.tags=['contact']
+
+    // check if id is valid
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(400).json({message: "invalid id. Contact id must be valid to delete contact"});
+    }
+
     const contactId = new ObjectId(req.params.id);
     console.log(`contactId: ${contactId}`);  // for testing purpose
 

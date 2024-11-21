@@ -1,5 +1,6 @@
 // IMPORT REQUIRED MODULES
 const express = require('express');
+const validateContact = require('../validation/contact-validation');
 
 // IMPORT CONTROLLER
 const contactController = require('../controllers/contact');
@@ -15,10 +16,18 @@ router.get('/', contactController.getAllContacts);
 router.get('/:id', contactController.getAContact)
 
 // Route to create a contact
-router.post('/', contactController.createNewContact);
+router.post('/', 
+    validateContact.addNewContactRules(),
+    validateContact.checkAddNewContact,
+    contactController.createNewContact
+);
 
 // Route to update a contact
-router.put('/:id', contactController.updateAContact);
+router.put('/:id',
+    validateContact.updateContactRules(),
+    validateContact.checkUpdateContact,
+    contactController.updateAContact,
+);
 
 // Route to delete a contact
 router.delete('/:id', contactController.deleteAContact);
