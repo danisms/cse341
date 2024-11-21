@@ -12,13 +12,14 @@ contactController.getAllContacts = async function(req, res) {
     //#swagger.tags=['contact']
     try {
         const dataResult = await mongodb.getDb().db('project01').collection('contacts').find();
-        dataResult.toArray((err, lists)=> {
+        dataResult.toArray((err)=> {
             if (err) {
                 logError(err);
                 res.status(400).json({message: err});
             }
+        }).then((contacts) => {
             res.setHeader('Content-Type', 'application/json');
-            res.status(200).json(lists);
+            res.status(200).json(contacts);
         })
     } catch (err) {
         console.error(err);
@@ -36,13 +37,14 @@ contactController.getAContact = async function(req, res) {
     const contactId = new ObjectId(req.params.id);
     try {
         const dataResult = await mongodb.getDb().db('project01').collection('contacts').find({ _id: contactId });
-        dataResult.toArray((err, lists)=> {
+        dataResult.toArray((err)=> {
             if (err) {
                 logError(err);
                 res.status(400).json({message: err});
             }
+        }).then((contacts) => {
             res.setHeader('Content-Type', 'application/json');
-            res.status(200).json(lists);
+            res.status(200).json(contacts);
         })
     } catch (err) {
         console.error(err);
